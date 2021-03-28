@@ -1,4 +1,4 @@
-*{
+body, html{
   margin:0;
   padding:0;
 }
@@ -12,6 +12,16 @@
   margin-left:52px;
 }
 
+span {
+  color:red;
+  margin-left: 5px;
+}
+
 input{
   margin:5px 0;
+}
+
+#width-validate, #height-validate {
+  color:red;
+  margin-left: 52px;
 }
