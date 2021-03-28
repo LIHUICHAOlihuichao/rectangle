@@ -8,10 +8,43 @@ $(()=>{
       $heightValidate = $('#height-validate'),
       $area = $('#area');
 
-  //浮点运算精确度解决
-  function roundFractional(x,n){
-    return Math.round(x*Math.pow(10,n)) / Math.pow(10,n);
-  } 
+  //字符级校验
+  $width.keypress((e) =>{
+    let key = e.key,
+        val = e.target.value,
+        pos = e.target.selectionStart;
+    
+    val = val.slice(0,pos) + key + val.slice(pos,val.length);
+
+    if(!/^(0|[1-9]\d*)(\.\d+)?((e|E)(\+|-)?\d+)?$/.test(val)) e.preventDefault();
+
+  });
+
+ $height.keypress((e) =>{
+    let key = e.key,
+        val = e.target.value,
+        pos = e.target.selectionStart;
+    
+    val = val.slice(0,pos) + key + val.slice(pos,val.length);
+
+    if(!/^(0|[1-9]\d*)(\.\d+)?((e|E)(\+|-)?\d+)?$/.test(val)) e.preventDefault();
+
+  });
+
+
+  //字段级校验
+  $width.focusout(() =>{
+    if(!validate($width,$widthValidate)){
+      $width.select();
+    }
+  });
+
+  $height.focusout(() =>{
+    if(!validate($height,$heightValidate)){
+      $height.select();
+    }
+  });
+
 
   /* calc button click*/
   $btnCal.click(()=>{
@@ -63,3 +96,8 @@ function validate(input,output){
   output.html('');
   return true;
 }
+
+//浮点运算精确度解决
+function roundFractional(x,n){
+  return Math.round(x*Math.pow(10,n)) / Math.pow(10,n);
+} 
